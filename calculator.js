@@ -24,10 +24,11 @@ window.onload = function () {
     "8",
     "9",
     "+",
-    "",
+    "Bksp",
     "0",
     ".",
     "=",
+    
   ];
   function makeKeys(numberOfRows, numberOfColumns) {
     for (let i = 0; i < numberOfRows; i++) {
@@ -60,13 +61,19 @@ window.onload = function () {
       firstNum = null
       secondNum = null
       currentOperater = null
-    } else if (value === "=") { // create condition to execute operate function when enter is pressed or = is clicked
+     } else if (value === "Bksp") {
+        currentInput 
+     } else if (value === "=") { // create condition to execute operate function when enter is pressed or = is clicked
         if (currentOperater !== null && firstNum !== null) { // Set condition if there is an opertor and firstNum value
             secondNum = parseFloat(currentInput) // convert the current string input into a float value
             currentInput = operate(firstNum, secondNum, currentOperater)
             firstNum = null
             currentOperater = null
         }
+    } else if (value === ".") {
+        if(!currentInput.includes(".")) {
+            currentInput += value
+        }    
     }else if (["+", "-", "*", "/"].includes(value)) {
         if (firstNum === null) {
             firstNum = parseFloat(currentInput);// convert the current string input into a float value
@@ -117,6 +124,7 @@ window.onload = function () {
     0: "0",
     ".": ".",
     Enter: "=",
+    Backspace: "Bksp"
   };
 
   // Add keydown event listener to highlight keys
@@ -179,7 +187,11 @@ window.onload = function () {
       case "*":
         return multiply(num1, num2);
       case "/":
+        if (num2 !== 0) {
         return divide(num1, num2);
+    } else {
+        return "Error! That's a no-go pal!"
+    }
       default:
         return null  
     }
