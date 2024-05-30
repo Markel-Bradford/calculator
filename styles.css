@@ -35,6 +35,8 @@ body {
     display: flex;
     flex: 1;
     gap: 10px;
+    background: none;
+    border: none;
 }
 
 .col {
@@ -47,6 +49,12 @@ body {
     border-radius: 8px;
     background: #fff;
     font-size: 24px;
+    height: 80px;
+}
+
+button {
+    justify-content: center;
+    align-items: center;
 }
 
 .col:hover {
