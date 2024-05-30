@@ -1,9 +1,24 @@
+/* <uniquifier>: Use a unique and descriptive class name */
+/* <weight>: Use a value from 400 to 900 */
+
+.orbitron-calc {
+  font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
 body {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     height: 100vh;
+    font-family: "Orbitron", sans-serif;
+}
+
+h1 {
+    text-align: center;
 }
 
 .calcContainer {
@@ -23,11 +38,17 @@ body {
 #screen {
     margin: 10px auto 25px auto;
     display: flex;
+    flex: 1;
     width: 360px;
     height: 90px;
     border: 2px solid black;
     border-radius: 6px;
     background: #fff;
+    font-size: 40px;
+    justify-content: end;
+    align-items: center;
+    padding: 0 15px;
+    overflow-x: hidden;
 }
 
 
@@ -55,9 +76,15 @@ body {
 button {
     justify-content: center;
     align-items: center;
+    font-family: "Orbitron", sans-serif;
 }
 
-.col:hover {
+.highlight {
+    background-color: #222;
+    color: #fff;
+}
+
+.col:hover, .highlight {
     background: #222;
     color: #fff;
 }
