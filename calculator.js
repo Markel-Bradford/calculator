@@ -62,7 +62,9 @@ window.onload = function () {
       secondNum = null
       currentOperater = null
      } else if (value === "Bksp") {
-        currentInput 
+      if (currentInput.length > 0) { 
+        currentInput = currentInput.slice(0, -1); // If the length of the currentInput is greater than 1, backspace will slice off last input value
+      }
      } else if (value === "=") { // create condition to execute operate function when enter is pressed or = is clicked
         if (currentOperater !== null && firstNum !== null) { // Set condition if there is an opertor and firstNum value
             secondNum = parseFloat(currentInput) // convert the current string input into a float value
