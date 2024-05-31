@@ -68,7 +68,7 @@ window.onload = function () {
      } else if (value === "=") { // create condition to execute operate function when enter is pressed or = is clicked
         if (currentOperater !== null && firstNum !== null) { // Set condition if there is an opertor and firstNum value
             secondNum = parseFloat(currentInput) // convert the current string input into a float value
-            currentInput = operate(firstNum, secondNum, currentOperater)
+            currentInput = roundRes(operate(firstNum, secondNum, currentOperater).toString());
             firstNum = null
             currentOperater = null
         }
@@ -81,14 +81,14 @@ window.onload = function () {
             firstNum = parseFloat(currentInput);// convert the current string input into a float value
         } else if (currentOperater !== null) {
             secondNum = parseFloat(currentInput)
-            firstNum = operate(firstNum, secondNum, currentOperater)
+            firstNum = roundRes(operate(firstNum, secondNum, currentOperater))
             currentInput = firstNum.toString();
         }
         currentOperater = value // Sets current operator to the input value of +, -, *, or /
         resetScreen = true // reset screen to display result
      } else {
         if (resetScreen) {
-            currentInput = value // display the result as the current input
+            currentInput = value; // display the result as the current input
             resetScreen = false 
         } else {
             // Add the next value to the current to update the current input and create a string of values
@@ -197,5 +197,10 @@ window.onload = function () {
       default:
         return null  
     }
+  }
+
+  // Create a function to round the result to two decimal places using Math.round
+  function roundRes(num) {
+    return Math.round(num * 100) / 100;
   }
 };
