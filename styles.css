@@ -107,3 +107,11 @@ button {
         font-size: 16px;
     }
 }
+
+@media screen and (max-height: 400px) {
+    .calcContainer {
+        height: 100%;
+        width: 80%;
+    }
+    
+} 

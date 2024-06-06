@@ -8,27 +8,11 @@ let resetScreen = false;
 
 window.onload = function () {
   const valuesArray = [
-    "Clear",
-    "(",
-    ")",
-    "/",
-    "1",
-    "2",
-    "3",
-    "*",
-    "4",
-    "5",
-    "6",
-    "-",
-    "7",
-    "8",
-    "9",
-    "+",
-    "Bksp",
-    "0",
-    ".",
-    "=",
-    
+    "A/C", "", "", "/",
+    "1", "2", "3", "*",
+    "4", "5", "6", "-",
+    "7", "8", "9", "+",
+    "Bksp", "0", ".", "=",
   ];
   function makeKeys(numberOfRows, numberOfColumns) {
     for (let i = 0; i < numberOfRows; i++) {
@@ -55,48 +39,47 @@ window.onload = function () {
 
   // Handle button click or key press
   function handleInput(value) {
-    // Create condition where all stored values will be cleared when delete is pressed or clear is clicked
-    if (value === "Clear") {
+    if (value === "A/C") {
+      // Reset everything
       currentInput = "";
-      firstNum = null
-      secondNum = null
-      currentOperater = null
-     } else if (value === "Bksp") {
-      if (currentInput.length > 0) { 
-        currentInput = currentInput.slice(0, -1); // If the length of the currentInput is greater than 1, backspace will slice off last input value
+      firstNum = null;
+      secondNum = null;
+      currentOperator = null;
+    } else if (value === "Bksp") {
+      if (currentInput.length > 0) {
+        currentInput = currentInput.slice(0, -1); // Backspace functionality
       }
-     } else if (value === "=") { // create condition to execute operate function when enter is pressed or = is clicked
-        if (currentOperater !== null && firstNum !== null) { // Set condition if there is an opertor and firstNum value
-            secondNum = parseFloat(currentInput) // convert the current string input into a float value
-            currentInput = roundRes(operate(firstNum, secondNum, currentOperater).toString());
-            firstNum = null
-            currentOperater = null
-        }
+    } else if (value === "=") {
+      if (currentOperator !== null && firstNum !== null) {
+        secondNum = parseFloat(currentInput);
+        currentInput = roundRes(
+          operate(firstNum, secondNum, currentOperator)
+        ).toString();
+        firstNum = null;
+        currentOperator = null;
+      }
     } else if (value === ".") {
-        if(!currentInput.includes(".")) {
-            currentInput += value
-        }    
-    }else if (["+", "-", "*", "/"].includes(value)) {
-        if (firstNum === null) {
-            firstNum = parseFloat(currentInput);// convert the current string input into a float value
-        } else if (currentOperater !== null) {
-            secondNum = parseFloat(currentInput)
-            firstNum = roundRes(operate(firstNum, secondNum, currentOperater))
-            currentInput = firstNum.toString();
-        }
-        currentOperater = value // Sets current operator to the input value of +, -, *, or /
-        resetScreen = true // reset screen to display result
-     } else {
-        if (resetScreen) {
-            currentInput = value; // display the result as the current input
-            resetScreen = false 
-        } else {
-            // Add the next value to the current to update the current input and create a string of values
-            currentInput += value;
-        }
-      
+      if (!currentInput.includes(".")) {
+        currentInput += value;
+      }
+    } else if (["+", "-", "*", "/"].includes(value)) {
+      if (firstNum === null) {
+        firstNum = parseFloat(currentInput); // Set firstNum if it is null
+      } else if (currentOperator !== null) {
+        secondNum = parseFloat(currentInput);
+        firstNum = roundRes(operate(firstNum, secondNum, currentOperator));
+        currentInput = firstNum.toString();
+      }
+      currentOperator = value; // Set the operator
+      resetScreen = true;
+    } else {
+      if (resetScreen) {
+        currentInput = value;
+        resetScreen = false;
+      } else {
+        currentInput += value;
+      }
     }
-    // Call the updateDisplay function to update the screen with the currentInput
     updateDisplay();
   }
 
@@ -107,9 +90,7 @@ window.onload = function () {
 
   // Map the keys to the expected value for keydown event
   const keyMap = {
-    Delete: "Clear",
-    "(": "(",
-    ")": ")",
+    Delete: "A/C",
     "/": "/",
     1: "1",
     2: "2",
@@ -126,7 +107,7 @@ window.onload = function () {
     0: "0",
     ".": ".",
     Enter: "=",
-    Backspace: "Bksp"
+    Backspace: "Bksp",
   };
 
   // Add keydown event listener to highlight keys
